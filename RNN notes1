@@ -1,0 +1,121 @@
+Recurrent Neural Networks (RNN)
+is a deep learning model
+https://towardsdatascience.com/recurrent-neural-networks-rnn-explained-the-eli5-way-3956887e8b75
+
+Output from previous step is fed as input to the current text
+Used for:
+ `sequence classification
+ `sequence labelling
+ `sequence generation
+ 
+a) sequence classification
+Preprocessing:
+include <sos> <eos> and <pad>
+pad to ensure the input is of the same length/size
+computations are perforemd till eos
+Output is the sentiment(0,1) for +/- at the end of the sequence
+
+# sequence = sentence
+
+b) sequence labelling
+Lbeling the part of speach for each input of the sequence
+Predicting the output dependent on current input and previous input
+Output at each time step
+
+MODEL: approximation function, the true relationship between input and output
+
+a)sequence classification
+Output is a softmax function of hidden representation and weights associated with it along with the bias
+input, weight, hidden reperesentation and bias
+
+b)sequence labeling
+Once hidden representation is computed, the output ata a particular timestep from the network is a softmax functin of hidden representation and weights associated with it along with the bias.
+Hidden representation allows model to learn long term dependecies in the input sequence
+
+LOSS FUNCTION
+
+Tells the model that some correction needs to be done in the learning process
+Eg. In classification compare 2 probability distributions, true and predicted probability
+Use cross-entropy loss function = summation of the true probability and log of predicted probability
+for labeling: since predictions are at every time step, there is a possibilit of amking an error at each time step. So we have to check the probability distribution and predicted probability distribution at ever time step to calculate the loss of the model
+
+LEARNING ALGORITHM
+Determine the best possible value for the parameters such that overall loss is minimized as much as possible.
+w,u,v and b are initialized randomly. Iterates over all observations in the data and for each, compute the overall loss and based on loss, the weights are updated till satisfied.
+Satisfied could mean:
+     overall loss of the model becomes 0
+     overall loss becomes very small value closer to 0
+     iterating for a fixed number of passes based on computational capacity
+
+
+
+https://builtin.com/data-science/recurrent-neural-networks-and-lstm
+
+RNNs have internal memory
+Suitable for problems that involve sequential data: time series, speech, text, financial data, audio, video, weather
+
+Recurrent v feed-forward neural networks
+
+FFNN, information moves in one direction, input-hidden-output
+Considers current input only and cant remember previous input as it has no memory
+
+RNN, info cycles in a loop. Consideres previous inputs in next output.
+Applies weights to current and previous input
+types: 1-1, 1-many, many-1, many-many
+
+Backpropagation
+Used for calculating the gradient error function with respect to a neural networks weights then uses these weights to decrease the error margin when training.
+
+Backprop = going backwards through nn to find the partial derivatives of the error with respect to the weights which enables you to subtract this value from the weights
+
+Frontprop = get output of the model and check if this output is correct to get the error.
+
+The derivatives are then used by gradient descent which iteratively minimizes a given function by adjusting the weight up or down depending on which decreases the error.
+
+BPTT - backprop through time : bp on an unrolled rnn
+
+Gradient: measures how much the output of a function changes if you change the inputs a little bit. Measures the change in all weights with regard to the change in error
+
+Limitations of RNN
+
+Exploding gradients - when algo assigns high importance to the weights,can be solved by truncating/ squashing gradients
+
+Vanishing gradients - g is too small such that model stops learning. Solved through LSTM by keeping gradients high enough
+
+LSTM - LONG SHORT-TERM MEMORY
+Building blocks for layers of rnn
+Can read, write and delete info from its memory
+Units known as tanh
+
+https://www.datacamp.com/tutorial/tutorial-for-recurrent-neural-network
+
+CNN
+convolutional neural network
+Used for computer vision, image classificaton
+Consists of convolutional layers, ReLu layers, pooling layers and output
+
+cnn v rnn
+cnn for sparse data like images, rnn for sequntial
+backpropagation v backpropagation tt
+finite i/o v infinite i/o
+feedforward v loops
+
+GRU - Gated reccurent unit
+Uses update and reset gate to solve vanishing gradient problem
+has lower trainig time in comparison to lstm model
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
